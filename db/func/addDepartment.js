@@ -1,28 +1,6 @@
-const viewAllDepartments = require("./viewAllDepartment");
+const db = require("../db");
 
 function addDepartment() { 
-
-  inquirer.prompt([
-      {
-        name: "name",
-        type: "input",
-        message: "What Department would you like to add?"
-      }
-  ]).then(function(res) {
-      var query = connection.query(
-          "INSERT INTO department SET ? ",
-          {
-            name: res.name
-          
-          },
-          function(err) {
-              if (err) throw err
-              console.table(res);
-              startPrompt();
-          }
-      )
-  })
-}
 // add a department 
 app.post('/api/new-department', ({ body }, res) => {
   const sql = `INSERT INTO deparment (department_name)
@@ -40,4 +18,5 @@ app.post('/api/new-department', ({ body }, res) => {
     });
   });
 });
-module.exports = viewAllDepartments;
+}
+module.exports = addDepartment;

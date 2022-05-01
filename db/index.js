@@ -1,13 +1,19 @@
-const connection = require("./connection");
-const connection = require("./func/addDepartment");
-const connection = require("./func/addEmployee");
-const connection = require("./func/addRole");
-const connection = require("./func/updateEmployee");
-const connection = require("./func/viewAllDepartment");
-const connection = require("./func/viewAllEmployees");
-const connection = require("./func/viewAllRoles");
 
+const addDepartment = require("./func/addDepartment");
+const addEmployee = require("./func/addEmployee");
+const addRole = require("./func/addRole");
+const updateEmployee = require("./func/updateEmployee");
+const viewAllDepartment = require("./func/viewAllDepartment");
+const viewAllEmployees = require("./func/viewAllEmployees");
+const viewAllRoles = require("./func/viewAllRoles");
 
+const allFunctions =
+  [addDepartment,
+  addEmployee,
+  addRole,
+  updateEmployee,
+  viewAllDepartment,
+  viewAllEmployees,
+  viewAllRoles];
 
-
-module.exports = new DB(connection);
+module.exports = allFunctions;
