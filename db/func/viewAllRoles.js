@@ -2,19 +2,13 @@ const db = require("../db");
 
 function viewAllRoles() {
   // view all roles
-  app.get("/api/roles", (req, res) => {
-    const sql = `SELECT id, title, salary, department AS title FROM roles`;
-    // Query database
-    db.query(sql, (err, rows) => {
-      if (err) {
-        res.status(500).json({ error: err.message });
-        return;
-      }
-      res.json({
-        message: "success",
-        data: rows,
-      });
-    });
-  });
+    viewAllRoles()
+      db.then(([rows]) => {
+        let roles = rows;
+        console.log("\n");
+        console.table(roles);
+      })
+      .then(() => loadMainPrompts());
+
 }
 module.exports = viewAllRoles;

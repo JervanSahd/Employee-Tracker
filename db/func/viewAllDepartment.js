@@ -1,10 +1,13 @@
 const db = require("../db");
-
 function viewAllDepartments() {
-  // view all departments
-  
-    return this.connection.promise().query("INSERT INTO role SET ?", role);
-  }
- 
+  db.query(
+    "SELECT department.id, department.name FROM department",
+    function (err, res) {
+      if (err) throw err;
+      console.table(res);
+      questions();
+    }
+  );
+}
 
 module.exports = viewAllDepartments;

@@ -6,6 +6,7 @@ const updateEmployee = require("./func/updateEmployee.js");
 const viewAllDepartment = require("./func/viewAllDepartment.js");
 const viewAllEmployees = require("./func/viewAllEmployees.js");
 const viewAllRoles = require("./func/viewAllRoles.js");
+const findAllRoles = require("./func/viewAllRoles.js");
 
   module.exports = { addDepartment,
     addEmployee,
@@ -13,4 +14,5 @@ const viewAllRoles = require("./func/viewAllRoles.js");
     updateEmployee,
     viewAllDepartment,
     viewAllEmployees,
+    findAllRoles,
     viewAllRoles};

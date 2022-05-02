@@ -1,21 +1,11 @@
-const db = require("../db"); 
+const db = require("../db");
 
 function viewAllEmployees() {
-// view all employees
-app.get('/api/employees', (req, res) => {
-  const sql = `SELECT id, first_name, last_name, role_id, manager_id AS employee FROM employees`;
-  // Query database
-  db.query(sql, (err, rows) => {
-    if (err) {
-      res.status(500).json({ error: err.message });
-       return;
-    }
-    res.json({
-      message: 'success',
-      data: rows
-    });
-  });
-});
-}    
-
+  // view all employees
+  return this.connection
+    .promise()
+    .query(
+      "SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary, CONCAT(manager.first_name, ' ', manager.last_name) AS manager FROM employee LEFT JOIN role on employee.role_id = role.id LEFT JOIN department on role.department_id = department.id LEFT JOIN employee manager on manager.id = employee.manager_id;"
+    );
+}
 module.exports = viewAllEmployees;
