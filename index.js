@@ -1,8 +1,7 @@
 const inquirer = require("inquirer");
 const db = require("./db");
-// const allFunctions = require("../../func");
 require("console.table");
-
+const {addRole,  } = require("./db");
 inquirer // creates object list of questions
   .prompt([
     {
@@ -20,17 +19,17 @@ inquirer // creates object list of questions
       ],
     },
   ])
-  .then(function (emp) {
-    switch (emp.choices) {
-      case [0]:
-        // viewAllDepartments();
-        
+  .then((res) => {
+    let choice = res.choice;
+    switch (choice) {
+      case "View All Departments":
+        viewAllDepartments();
         break;
 
       case "View All Roles":
         viewAllRoles();
         break;
-        
+
       case "View all Employees":
         viewAllEmployees();
         break;
@@ -40,7 +39,7 @@ inquirer // creates object list of questions
         break;
 
       case "Add a role":
-        addRole();
+        createRole();
         break;
 
       case "Add an employee":
@@ -52,3 +51,33 @@ inquirer // creates object list of questions
         break;
     }
   });
+function createRole() {
+  db.findAllDepartments().then(([rows]) => {
+    let departments = rows;
+    const departmentChoices = departments.map(({ id, name }) => ({
+      name: name,
+      value: id,
+    }));
+
+    prompt([
+      {
+        name: "title",
+        message: "What is the name of the role?",
+      },
+      {
+        name: "salary",
+        message: "What is the salary of the role?",
+      },
+      {
+        type: "list",
+        name: "department_id",
+        message: "Which department does the role belong to?",
+        choices: departmentChoices,
+      },
+    ]).then((role) => {
+      addRole(role)
+        .then(() => console.log(`Added ${role.title} to the database`))
+        .then(() => loadMainPrompts());
+    });
+  });
+}

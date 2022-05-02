@@ -1,19 +1,16 @@
 
-const addDepartment = require("./func/addDepartment");
-const addEmployee = require("./func/addEmployee");
-const addRole = require("./func/addRole");
-const updateEmployee = require("./func/updateEmployee");
-const viewAllDepartment = require("./func/viewAllDepartment");
-const viewAllEmployees = require("./func/viewAllEmployees");
-const viewAllRoles = require("./func/viewAllRoles");
+const addDepartment = require("./func/addDepartment.js");
+const addEmployee = require("./func/addEmployee.js");
+const addRole = require("./func/addRole.js");
+const updateEmployee = require("./func/updateEmployee.js");
+const viewAllDepartment = require("./func/viewAllDepartment.js");
+const viewAllEmployees = require("./func/viewAllEmployees.js");
+const viewAllRoles = require("./func/viewAllRoles.js");
 
-const allFunctions =
-  [addDepartment,
-  addEmployee,
-  addRole,
-  updateEmployee,
-  viewAllDepartment,
-  viewAllEmployees,
-  viewAllRoles];
-
-module.exports = allFunctions;
+  module.exports = { addDepartment,
+    addEmployee,
+    addRole,
+    updateEmployee,
+    viewAllDepartment,
+    viewAllEmployees,
+    viewAllRoles};
