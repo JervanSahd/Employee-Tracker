@@ -62,13 +62,21 @@ function questions() {
   });
 }
 
-
+// function viewAllDepartments() {
+//   db.viewAllDepartments(
+//     "SELECT department.id, department.name FROM department",
+//     function (err, res) {
+//       if (err) throw err;
+//       console.table(res);
+//     }
+//   );
+// }
 function viewAllDepartments() {
-  db.query(
-    "SELECT department.id, department.name FROM department",
-    function (err, res) {
-      if (err) throw err;
-      console.table(res);
-    }
-  );
+  db.viewAllDepartment()
+    .then(([rows]) => {
+      let department = rows;
+      console.log("\n");
+      console.table(department);
+    })
+    .then(() => questions());
 }
