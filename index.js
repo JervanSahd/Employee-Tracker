@@ -1,7 +1,16 @@
 const { prompt } = require("inquirer");
 const db = require("./db");
 require("console.table");
+const mysql = require("mysql2");
 
+const connection = mysql.createConnection({
+  host: "localhost",
+  // Your username
+  user: "root",
+  // Your password
+  password: "root",
+  database: "employee_db",
+});
 
 function questions() {
   // creates object list of questions
@@ -18,7 +27,7 @@ function questions() {
         "Add a role",
         "Add an employee",
         "Update an employee role",
-        "All Finished",
+        "Exit Application",
       ],
     },
   ]).then((res) => {
@@ -26,35 +35,34 @@ function questions() {
     switch (choices) {
       case "View All Departments":
         viewAllDepartments();
-
         break;
 
-      case [1]:
-        // viewAllRoles();
+      case "View All Roles":
+        viewAllRoles();
         break;
 
-      case [2]:
-        // viewAllEmployees();
+      case "View all Employees":
+        viewAllEmployees();
         break;
 
-      case [3]:
-        // addDepartment();
+      case "Add a department":
+        addDepartment();
         break;
 
-      case [4]:
+      case "Add a role":
         // addRole();
         break;
 
-      case [5]:
+      case "Add an employee":
         // addEmployee();
         break;
 
-      case [6]:
+      case "Update an employee role":
         // updateRole();
         break;
 
-      case [7]:
-        // endStatement();
+      case "Exit Application":
+        exitApp();
         break;
     }
   });
@@ -62,12 +70,47 @@ function questions() {
 
 // View all department
 function viewAllDepartments() {
-  return this.db
-    .query("SELECT department.id, department.name FROM department;")
-    .then(([rows]) => {
-      let departments = rows;
+  connection
+    .promise()
+    .query("SELECT * FROM department;")
+    .then(([data]) => {
+      let departments = data;
       console.log("\n");
       console.table(departments);
     })
     .then(() => questions());
 }
+
+// View all Roles
+function viewAllRoles() {
+  connection
+    .promise()
+    .query("SELECT * FROM role;")
+    .then(([data]) => {
+      let role = data;
+      console.log("\n");
+      console.table(role);
+    })
+    .then(() => questions());
+}
+
+// View all Employees
+function viewAllEmployees() {
+  connection
+    .promise()
+    .query("SELECT * FROM employee;")
+    .then(([data]) => {
+      let employee = data;
+      console.log("\n");
+      console.table(employee);
+    })
+    .then(() => questions());
+}
+
+// Exit the application
+function exitApp() {
+  console.log("Exiting Application");
+  process.exit();
+}
+
+questions();
