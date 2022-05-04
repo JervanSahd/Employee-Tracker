@@ -86,4 +86,6 @@ Business owners are able to view and manage the departments, roles, and employee
 
 * Walkthrough video demonstrating the functionality of the application.
 
+
 * GitHub repository URL
+https://github.com/JervanSahd/Employee-Tracker

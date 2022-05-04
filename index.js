@@ -1,9 +1,7 @@
 const { prompt } = require("inquirer");
-const logo = require("asciiart-logo");
 const db = require("./db");
 require("console.table");
 
-questions();
 
 function questions() {
   // creates object list of questions
@@ -62,21 +60,14 @@ function questions() {
   });
 }
 
-// function viewAllDepartments() {
-//   db.viewAllDepartments(
-//     "SELECT department.id, department.name FROM department",
-//     function (err, res) {
-//       if (err) throw err;
-//       console.table(res);
-//     }
-//   );
-// }
+// View all department
 function viewAllDepartments() {
-  db.viewAllDepartment()
+  return this.db
+    .query("SELECT department.id, department.name FROM department;")
     .then(([rows]) => {
-      let department = rows;
+      let departments = rows;
       console.log("\n");
-      console.table(department);
+      console.table(departments);
     })
     .then(() => questions());
 }

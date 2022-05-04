@@ -1,18 +1,20 @@
+// const connection = require("./connection");
+const mysql = require("mysql2");
 
-const addDepartment = require("./func/addDepartment.js");
-const addEmployee = require("./func/addEmployee.js");
-const addRole = require("./func/addRole.js");
-const updateEmployee = require("./func/updateEmployee.js");
-const viewAllDepartment = require("./func/viewAllDepartment.js");
-const viewAllEmployees = require("./func/viewAllEmployees.js");
-const viewAllRoles = require("./func/viewAllRoles.js");
-const findAllRoles = require("./func/viewAllRoles.js");
+const connection = mysql.createConnection({
+  host: "localhost",
+  // Your username
+  user: "root",
+  // Your password
+  password: "root",
+  database: "employee_db"
+});
 
-  module.exports = { addDepartment,
-    addEmployee,
-    addRole,
-    updateEmployee,
-    viewAllDepartment,
-    viewAllEmployees,
-    findAllRoles,
-    viewAllRoles};
+connection.connect(function (err) {
+  if (err) throw err;
+});
+
+
+
+// module.exports = new DB(connection);
+module.exports = connection;
