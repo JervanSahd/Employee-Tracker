@@ -50,7 +50,7 @@ function questions() {
         break;
 
       case "Add a role":
-        // addRole();
+        // addRole(); Additional functions are needed.
         break;
 
       case "Add an employee":
